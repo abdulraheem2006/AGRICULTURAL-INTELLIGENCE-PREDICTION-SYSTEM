@@ -1,0 +1,10 @@
+Starting Test...
+Requesting case 1...
+Status: 200
+Case 1: Conf=65%
+------------------------------
+Requesting case 2...
+Status: 200
+Case 2: Conf=65%
+------------------------------
+Done.

@@ -1,0 +1,240 @@
+/* Enhanced Button Styles */
+.btn-enhanced {
+    position: relative;
+    text-transform: uppercase;
+    padding: 0.75em 2em;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 6em;
+    transition: all 0.2s;
+    border: none;
+    font-family: inherit;
+    font-weight: 500;
+    z-index: 1;
+}
+
+.btn-enhanced:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-enhanced:active:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-enhanced::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+}
+
+.btn-enhanced.btn-primary::after {
+    background-color: #2563eb;
+}
+
+.btn-enhanced.btn-green::after {
+    background-color: #059669;
+}
+
+.btn-enhanced.btn-blue::after {
+    background-color: #3B82F6;
+}
+
+.btn-enhanced.btn-purple::after {
+    background-color: #8B5CF6;
+}
+
+.btn-enhanced.btn-orange::after {
+    background-color: #F97316;
+}
+
+.btn-enhanced:hover:not(:disabled)::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn-enhanced:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Global Loader Styles */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+}
+
+.loading svg {
+    width: 64px;
+    height: 48px;
+}
+
+.loading svg polyline {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.loading svg polyline#back {
+    fill: none;
+    stroke: #ff4d5033;
+}
+
+.loading svg polyline#front {
+    fill: none;
+    stroke: #ff4d4f;
+    stroke-dasharray: 48, 144;
+    stroke-dashoffset: 192;
+    animation: dash_682 1.4s linear infinite;
+}
+
+/* Enhanced Button Styles */
+.btn-enhanced {
+    position: relative;
+    text-transform: uppercase;
+    padding: 0.75em 2em;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 6em;
+    transition: all 0.2s;
+    border: none;
+    font-family: inherit;
+    font-weight: 500;
+    z-index: 1;
+}
+
+.btn-enhanced:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-enhanced:active:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-enhanced::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+}
+
+.btn-enhanced.btn-primary::after {
+    background-color: #2563eb;
+}
+
+.btn-enhanced.btn-green::after {
+    background-color: #059669;
+}
+
+.btn-enhanced.btn-blue::after {
+    background-color: #3B82F6;
+}
+
+.btn-enhanced.btn-purple::after {
+    background-color: #8B5CF6;
+}
+
+.btn-enhanced.btn-orange::after {
+    background-color: #F97316;
+}
+
+.btn-enhanced:hover:not(:disabled)::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
+}
+
+.btn-enhanced:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Global Loader Styles */
+.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px;
+}
+
+.loading svg {
+    width: 64px;
+    height: 48px;
+}
+
+.loading svg polyline {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.loading svg polyline#back {
+    fill: none;
+    stroke: #ff4d5033;
+}
+
+.loading svg polyline#front {
+    fill: none;
+    stroke: #ff4d4f;
+    stroke-dasharray: 48, 144;
+    stroke-dashoffset: 192;
+    animation: dash_682 1.4s linear infinite;
+}
+
+@keyframes dash_682 {
+    72.5% {
+        opacity: 0;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Custom Input Style */
+.input {
+    background-color: #383838;
+    border: 1ex solid none;
+    border-top-width: 1.7em;
+    margin: 0;
+    padding: 0;
+    color: #383838;
+    word-wrap: break-word;
+    outline: 7px solid #383838;
+    height: 30px;
+    font-size: 17px;
+    text-align: center;
+    transition: all 1s;
+    max-width: 190px;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.input:hover {
+    border-top-width: 0.2em;
+    background-color: #f1e8e8;
+}
+
+.input:focus {
+    border-top-width: 0.2em;
+    background-color: #f1e8e8;
+}

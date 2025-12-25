@@ -1,0 +1,5 @@
+{
+  "name": "Copy of AIPS - Agricultural Intelligent Prediction System",
+  "description": "A comprehensive AI-powered agricultural platform for crop prediction, soil analysis, weather forecasting, and resource optimization using Google Gemini API and Open-Meteo.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                fontFamily: 'Times New Roman',
+                fontSize: '28px',
+                primaryColor: '#ffffff',
+                primaryTextColor: '#000000',
+                primaryBorderColor: '#000000',
+                lineColor: '#000000',
+                secondaryColor: '#ffffff',
+                tertiaryColor: '#ffffff',
+                mainBkg: '#ffffff',
+                nodeBorder: '#000000',
+                clusterBkg: '#ffffff',
+                clusterBorder: '#000000',
+                edgeLabelBackground: '#ffffff',
+                actorBorder: '#000000',
+                actorBkg: '#ffffff'
+            }
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background: white;
+            margin: 0;
+            padding: 50px;
+            width: 3000px;
+            /* Massive width */
+            height: 3000px;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            transform: scale(2.5);
+            /* 2.5x Zoom for crisp details */
+            transform-origin: top center;
+            margin-top: 50px;
+        }
+
+        /* Ultimate Formal Styling */
+        g.node rect,
+        g.node circle,
+        g.node polygon,
+        g.node path {
+            stroke-width: 4px !important;
+            /* Very thick lines */
+            fill: #ffffff !important;
+            stroke: #000000 !important;
+        }
+
+        g.edgePath path {
+            stroke-width: 4px !important;
+            stroke: #000000 !important;
+        }
+
+        g.cluster rect {
+            stroke-width: 3px !important;
+            stroke: #000000 !important;
+            fill: #ffffff !important;
+        }
+
+        text {
+            font-weight: 900 !important;
+            font-family: 'Times New Roman', serif !important;
+            text-transform: uppercase;
+            fill: #000000 !important;
+            font-size: 28px !important;
+        }
+
+        .nodeLabel {
+            color: #000000 !important;
+        }
+
+        .label {
+            font-size: 28px !important;
+            font-weight: bold !important;
+            color: #000000 !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mermaid">
+        graph TD
+        %% Actors
+        User((USER))
+
+        %% Frontend Layer
+        subgraph "FRONTEND LAYER"
+        UI[WEB INTERFACE]
+        Dash[DASHBOARD]
+        PredPage[PREDICTION MODULE]
+        SoilPage[SOIL ANALYSIS MODULE]
+
+        User <==>|INTERACTS| UI
+            UI ==> Dash
+            UI ==> PredPage
+            UI ==> SoilPage
+            end
+
+            %% Backend Layer
+            subgraph "BACKEND LAYER (FLASK)"
+            API[API GATEWAY]
+
+            subgraph "CONTROLLERS"
+            YieldCtrl[YIELD CONTROLLER]
+            SoilCtrl[SOIL CONTROLLER]
+            PriceCtrl[PRICE CONTROLLER]
+            OptCtrl[OPTIMIZATION CONTROLLER]
+            end
+
+            subgraph "INTELLIGENT MODELS"
+            RF[[RANDOM FOREST]]
+            MILP[[MILP OPTIMIZER]]
+            LSTM[[LSTM NETWORK]]
+            end
+            end
+
+            %% Data Layer
+            subgraph "DATA STORAGE"
+            DB[(SQLITE DATABASE)]
+            end
+
+            %% External Services
+            subgraph "EXTERNAL APIs"
+            Weather[OPENWEATHERMAP]
+            end
+
+            %% Connections
+            Dash -.->|GET| API
+            PredPage -.->|POST| API
+            SoilPage -.->|POST| API
+
+            API ==> YieldCtrl
+            API ==> SoilCtrl
+            API ==> PriceCtrl
+            API ==> OptCtrl
+
+            YieldCtrl <==> RF
+                OptCtrl <==> MILP
+                    PriceCtrl <==> LSTM
+
+                        YieldCtrl ==>|READ/WRITE| DB
+                        SoilCtrl ==>|READ/WRITE| DB
+                        PriceCtrl ==>|READ/WRITE| DB
+
+                        API <==>|HTTPS| Weather
+    </div>
+</body>
+
+</html>
