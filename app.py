@@ -9,8 +9,9 @@ app = Flask(__name__)
 # Load datasets
 try:
     crop_data = pd.read_csv('data/crop_data.csv')
-except:
+except (FileNotFoundError, pd.errors.EmptyDataError) as e:
     crop_data = None
+    print(f"Warning: Could not load crop data: {e}")
 
 # Crop recommendation based on NPK values and environmental conditions
 def recommend_crop(N, P, K, temperature, humidity, ph, rainfall):
@@ -225,8 +226,12 @@ def api_recommend_crop():
         
         recommendations = recommend_crop(N, P, K, temperature, humidity, ph, rainfall)
         return jsonify({'success': True, 'recommendations': recommendations})
+    except (ValueError, KeyError) as e:
+        app.logger.error(f"Error in crop recommendation: {e}")
+        return jsonify({'success': False, 'error': 'Invalid input parameters. Please check your data and try again.'})
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
+        app.logger.error(f"Unexpected error in crop recommendation: {e}")
+        return jsonify({'success': False, 'error': 'An unexpected error occurred. Please try again later.'})
 
 @app.route('/api/recommend-fertilizer', methods=['POST'])
 def api_recommend_fertilizer():
@@ -239,8 +244,12 @@ def api_recommend_fertilizer():
         
         recommendations = recommend_fertilizer(N, P, K, crop_type)
         return jsonify({'success': True, 'recommendations': recommendations})
+    except (ValueError, KeyError) as e:
+        app.logger.error(f"Error in fertilizer recommendation: {e}")
+        return jsonify({'success': False, 'error': 'Invalid input parameters. Please check your data and try again.'})
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
+        app.logger.error(f"Unexpected error in fertilizer recommendation: {e}")
+        return jsonify({'success': False, 'error': 'An unexpected error occurred. Please try again later.'})
 
 @app.route('/api/predict-disease', methods=['POST'])
 def api_predict_disease():
@@ -251,8 +260,12 @@ def api_predict_disease():
         
         prediction = predict_disease(crop, symptoms)
         return jsonify({'success': True, 'prediction': prediction})
+    except (ValueError, KeyError) as e:
+        app.logger.error(f"Error in disease prediction: {e}")
+        return jsonify({'success': False, 'error': 'Invalid input parameters. Please check your data and try again.'})
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
+        app.logger.error(f"Unexpected error in disease prediction: {e}")
+        return jsonify({'success': False, 'error': 'An unexpected error occurred. Please try again later.'})
 
 @app.route('/api/predict-yield', methods=['POST'])
 def api_predict_yield():
@@ -268,8 +281,12 @@ def api_predict_yield():
         
         prediction = predict_yield(crop, area, N, P, K, rainfall, temperature)
         return jsonify({'success': True, 'prediction': prediction})
+    except (ValueError, KeyError) as e:
+        app.logger.error(f"Error in yield prediction: {e}")
+        return jsonify({'success': False, 'error': 'Invalid input parameters. Please check your data and try again.'})
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
+        app.logger.error(f"Unexpected error in yield prediction: {e}")
+        return jsonify({'success': False, 'error': 'An unexpected error occurred. Please try again later.'})
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=os.environ.get('DEBUG', 'False') == 'True', host='0.0.0.0', port=5000)
