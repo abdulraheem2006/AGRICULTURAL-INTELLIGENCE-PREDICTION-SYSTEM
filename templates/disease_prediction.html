@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Prediction - AIPS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>🌾 AIPS</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/crop-recommendation">Crop Recommendation</a></li>
+                <li><a href="/fertilizer-recommendation">Fertilizer</a></li>
+                <li><a href="/disease-prediction" class="active">Disease Prediction</a></li>
+                <li><a href="/yield-prediction">Yield Prediction</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="form-section">
+            <h1>🔬 Crop Disease Prediction</h1>
+            <p class="subtitle">Identify crop diseases and get treatment recommendations</p>
+
+            <form id="diseaseForm" class="prediction-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="crop">Select Crop</label>
+                        <select id="crop" name="crop" required>
+                            <option value="">-- Select Crop --</option>
+                            <option value="Rice">Rice</option>
+                            <option value="Wheat">Wheat</option>
+                            <option value="Tomato">Tomato</option>
+                            <option value="Potato">Potato</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="symptoms">Select Symptoms</label>
+                        <select id="symptoms" name="symptoms" required>
+                            <option value="">-- First select a crop --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Diagnose Disease</button>
+            </form>
+
+            <div id="results" class="results hidden">
+                <h2>Diagnosis & Treatment</h2>
+                <div id="diagnosis"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Agricultural Intelligence Prediction System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/disease_prediction.js') }}"></script>
+</body>
+</html>
